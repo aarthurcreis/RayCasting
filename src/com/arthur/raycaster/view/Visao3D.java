@@ -1,5 +1,8 @@
-import javax.swing.*;
+package com.arthur.raycaster.view;
+
 import java.awt.*;
+import javax.swing.*;
+import com.arthur.raycaster.core.Bolinha;
 
 public class Visao3D extends JPanel {
 
@@ -8,10 +11,19 @@ public class Visao3D extends JPanel {
         setBackground(Color.BLACK);
     }
 
+    private void loopPrincipal() {
+        new Timer(16, e -> {
+            Bolinha bolinha = new Bolinha();
+            repaint();
+        }).start();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2d.setColor(Color.WHITE);
     }
 }
