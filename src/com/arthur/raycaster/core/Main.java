@@ -1,6 +1,8 @@
 package com.arthur.raycaster.core;
 
 import javax.swing.*;
+
+import com.arthur.raycaster.view.Visao2D;
 import com.arthur.raycaster.view.Visao3D;
 
 public class Main {
@@ -9,9 +11,9 @@ public class Main {
         JFrame visao3DJanela = new JFrame("Visão 3D");
         janela(visao3DJanela, visao3D, 75, 75, false);
 
-        Bolinha bolinha = new Bolinha();
-        JFrame bolinhaJanela = new JFrame("Bolinha");
-        janela(bolinhaJanela, bolinha, 850, 250, false);
+        Visao2D visao2D = new Visao2D();
+        JFrame visao2DJanela = new JFrame("Visão 2D");
+        janela(visao2DJanela, visao2D, 850, 250, false);
     }
 
     private static void janela(JFrame janela, JPanel painel, int x, int y, boolean redimensionavel) {

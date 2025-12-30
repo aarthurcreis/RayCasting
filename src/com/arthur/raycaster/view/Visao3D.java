@@ -2,20 +2,17 @@ package com.arthur.raycaster.view;
 
 import java.awt.*;
 import javax.swing.*;
-import com.arthur.raycaster.core.Bolinha;
 
 public class Visao3D extends JPanel {
 
     public Visao3D() {
         setPreferredSize(new Dimension(720, 360));
         setBackground(Color.BLACK);
+
+        loopPrincipal();
     }
 
     private void loopPrincipal() {
-        new Timer(16, e -> {
-            Bolinha bolinha = new Bolinha();
-            repaint();
-        }).start();
     }
 
     @Override
