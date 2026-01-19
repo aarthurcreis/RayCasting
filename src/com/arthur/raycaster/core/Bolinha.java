@@ -1,21 +1,18 @@
 package com.arthur.raycaster.core;
 
 import java.awt.Rectangle;
-import static java.lang.Math.sqrt;
 
 import com.arthur.raycaster.map.Mapa;
 
 public class Bolinha {
+    private final Mapa mapa;
+    private static final int DIAMETRO = 40;
+
     private int x = 100, y = 100;
     private int deltaX, deltaY;
     private boolean esquerda, direita, cima, baixo;
 
-    private final int DIAMETRO = 40;
-
-    private final Mapa mapa = new Mapa();
-
-    public Bolinha() {
-    }
+    public Bolinha(Mapa mapa) { this.mapa = mapa; }
 
     public int getX() { return x; }
     public int getY() { return y; }
@@ -30,7 +27,7 @@ public class Bolinha {
         // cálculo da nova posição
         deltaX = 0;
         deltaY = 0;
-        final int VEL = 4;
+        final int VEL = 2;
 
         if(esquerda) deltaX -= VEL;
         if(direita) deltaX += VEL;
@@ -39,36 +36,36 @@ public class Bolinha {
 
         // correção da velocidade diagonal
         if((direita || esquerda) && (cima || baixo)) {
-            deltaX *= 1 / sqrt(2);
-            deltaY *= 1 / sqrt(2);
+            deltaX *= (double) 1 / Math.sqrt(2);
+            deltaY *= (double) 1 / Math.sqrt(2);
         }
     }
 
     public void colisao() {
         // colisão horizontal
-        if (deltaX != 0) {
+        if(deltaX != 0) {
             boolean colisao = false;
             Rectangle hitboxX = new Rectangle(x + deltaX, y, DIAMETRO, DIAMETRO);
-            for (Rectangle parede : mapa.getParedes()) {
-                if (hitboxX.intersects(parede)) {
+            for(Rectangle parede : mapa.getParedes()) {
+                if(hitboxX.intersects(parede)) {
                     colisao = true;
                     break;
                 }
             }
-            if (!colisao) x += deltaX;
+            if(!colisao) x += deltaX;
         }
 
         // colisão vertical
-        if (deltaY != 0) {
+        if(deltaY != 0) {
             boolean colisao = false;
             Rectangle hitboxY = new Rectangle(x, y + deltaY, DIAMETRO, DIAMETRO);
-            for (Rectangle parede : mapa.getParedes()) {
-                if (hitboxY.intersects(parede)) {
+            for(Rectangle parede : mapa.getParedes()) {
+                if(hitboxY.intersects(parede)) {
                     colisao = true;
                     break;
                 }
             }
-            if (!colisao) y += deltaY;
+            if(!colisao) y += deltaY;
         }
     }
 }

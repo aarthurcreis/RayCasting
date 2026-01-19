@@ -11,10 +11,7 @@ public class Teclas {
     private final Raios raios;
     private final Bolinha bolinha;
 
-    public Teclas(Bolinha bolinha, Raios raios) {
-        this.bolinha = bolinha;
-        this.raios = raios;
-    }
+    public Teclas(Bolinha bolinha, Raios raios) { this.bolinha = bolinha; this.raios = raios; }
 
     public void configurarTeclas(JComponent JComponent) {
         InputMap im = JComponent.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
