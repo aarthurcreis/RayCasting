@@ -7,8 +7,8 @@ public class Raios {
     private final Mapa mapa;
     private final Bolinha bolinha;
 
-    private static final double FOV = 80d;
-    private static final int NUM_RAIOS = 80;
+    private static final double FOV = 90d;
+    private static final int NUM_RAIOS = 50;
     private static final double[] DISTANCIAS = new double[NUM_RAIOS];
     private static final double[] DISTANCIAS_CORRIGIDAS = new double[NUM_RAIOS];
 
@@ -16,10 +16,7 @@ public class Raios {
     private boolean olhaEsq, olhaDir;
     private int inicioLinhaX, inicioLinhaY;
 
-    public Raios(Bolinha bolinha, Mapa mapa) {
-        this.bolinha = bolinha;
-        this.mapa = mapa;
-    }
+    public Raios(Bolinha bolinha, Mapa mapa) { this.bolinha = bolinha; this.mapa = mapa; }
 
     public double getFOV() { return FOV; }
     public int getNumRaios() { return NUM_RAIOS; }

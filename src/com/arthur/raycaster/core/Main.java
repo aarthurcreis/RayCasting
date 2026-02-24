@@ -1,23 +1,23 @@
 package com.arthur.raycaster.core;
 
-import javax.swing.*;
-
-import com.arthur.raycaster.view.Contexto;
+import com.arthur.raycaster.view.Common;
 import com.arthur.raycaster.view.Visao2D;
 import com.arthur.raycaster.view.Visao3D;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 public class Main {
     public static void main(String[] args) {
+        final Common common = new Common();
 
-        final Contexto mundo = new Contexto();
-
-        Visao3D visao3D = new Visao3D(mundo);
+        Visao3D visao3D = new Visao3D(common);
         JFrame visao3DJanela = new JFrame("Visão 3D");
-        janela(visao3DJanela, visao3D, 75, 75, false);
+        janela(visao3DJanela, visao3D, 120, 120, false);
 
-        Visao2D visao2D = new Visao2D(mundo);
+        Visao2D visao2D = new Visao2D(common);
         JFrame visao2DJanela = new JFrame("Visão 2D");
-        janela(visao2DJanela, visao2D, 850, 250, false);
+        janela(visao2DJanela, visao2D, 1350, 450, false);
     }
 
     private static void janela(JFrame janela, JPanel painel, int x, int y, boolean redimensionavel) {

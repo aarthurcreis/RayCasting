@@ -1,15 +1,15 @@
 package com.arthur.raycaster.core;
 
-import java.awt.Rectangle;
-
 import com.arthur.raycaster.map.Mapa;
+
+import java.awt.Rectangle;
 
 public class Bolinha {
     private final Mapa mapa;
     private static final int DIAMETRO = 40;
 
-    private int x = 100, y = 100;
     private int deltaX, deltaY;
+    private int x = 100, y = 100;
     private boolean esquerda, direita, cima, baixo;
 
     public Bolinha(Mapa mapa) { this.mapa = mapa; }
@@ -18,10 +18,10 @@ public class Bolinha {
     public int getY() { return y; }
     public int getDiametro() { return DIAMETRO; }
 
-    public void setEsquerda(boolean valor) { this.esquerda = valor; }
-    public void setDireita(boolean valor) { this.direita = valor; }
     public void setCima(boolean valor) { this.cima = valor; }
     public void setBaixo(boolean valor) { this.baixo = valor; }
+    public void setDireita(boolean valor) { this.direita = valor; }
+    public void setEsquerda(boolean valor) { this.esquerda = valor; }
 
     public void movimentacao() {
         // cálculo da nova posição

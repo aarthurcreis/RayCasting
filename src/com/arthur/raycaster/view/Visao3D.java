@@ -1,48 +1,46 @@
 package com.arthur.raycaster.view;
 
-import java.awt.*;
-import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Dimension;
 
 public class Visao3D extends JPanel {
-    private final Contexto contexto;
+    private final Common common;
+
     private static final double PROJECAO = 200d;
+    private static final int ALTURA_TELA = 540;
+    private static final int LARGURA_TELA = 1080;
+    private static final int DELAY_ENTRE_CADA_QUADR0 = 16; // milissegundos
 
-    public Visao3D(Contexto contexto) {
-        this.contexto = contexto;
+    public Visao3D(Common common) {
+        this.common = common;
 
-        setPreferredSize(new Dimension(720, 360));
+        setPreferredSize(new Dimension(LARGURA_TELA, ALTURA_TELA));
         setBackground(Color.BLACK);
 
-        new Timer(16, e -> repaint()).start();
+        new Timer(DELAY_ENTRE_CADA_QUADR0, e -> repaint()).start();
     }
 
-    private void desenharParedes(Graphics2D g2d) {
-        double[] dist = contexto.raios.getDistanciasCorrigidas();
-        int n = dist.length;
+    private void desenharParedes(Graphics g) {
+        double[] distancias = common.raios.getDistanciasCorrigidas();
+        int larguraColuna = getWidth() / distancias.length;
 
-        int larguraTela = getWidth();
-        int alturaTela = getHeight();
-        int larguraColuna = larguraTela / n;
+        for (int i = 0; i < distancias.length; i++) {
+            double distancia = distancias[i];
+            if (distancia <= 0) continue;
 
-        for(int i = 0; i < n; i++) {
-            if(dist[i] <= 0) continue;
+            int alturaParede = Math.min((int) ((PROJECAO / distancia) * 2), getHeight());
+            int posicaoX = i * larguraColuna;
+            int posicaoY = (getHeight() - alturaParede) / 2;
 
-            int altura = (int) (PROJECAO / dist[i]) * 2;
-            if(altura > alturaTela) altura = alturaTela;
-
-            int x = i * larguraColuna;
-            int y = (alturaTela - altura) / 2;
-
-            int shade = (int) Math.max(0, 255 - dist[i] * 25);
-            g2d.setColor(new Color(shade, shade, shade));
-
-            g2d.fillRect(x, y, larguraColuna + 1, altura);
+            int intensidadeCor = (int) Math.max(0, 255 - distancia * 25);
+            g.setColor(new Color(intensidadeCor, intensidadeCor, intensidadeCor));
+            g.fillRect(posicaoX, posicaoY, larguraColuna + 1, alturaParede);
         }
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        desenharParedes((Graphics2D) g);
-    }
+    protected void paintComponent(Graphics g) { super.paintComponent(g); desenharParedes(g); }
 }
